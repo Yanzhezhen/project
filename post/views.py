@@ -33,4 +33,6 @@ def post_list(request):
     return render(request, 'post_list.html')
 
 def search(request):
-    return render(request, 'search.html')
+    keyword = request.POST.get('keyword')
+    posts = Post.objects.filter(content__contains=keyword)
+    return render(request, 'search.html', {'posts':posts})
